@@ -1,0 +1,63 @@
+CREATE TABLE Employee(
+ Eid int , 
+ EName varchar(255) , 
+ Addres varchar(255) , 
+ Salary int , 
+ Comission int
+);
+insert into Employee VALUES (1,'Amit',"Pune",35000,5000);
+insert into Employee VALUES (2,'Sneha',"Pune",25000,NULL);
+insert into Employee VALUES (3,'Savita',"Nashik",28000,2000);
+insert into Employee VALUES (4,'Pooja','Mumbai',19000,NULL);
+insert into Employee VALUES (5,'Sagar','Mumbai',25000,3000);
+SELECT * FROM Employee ;
+
+/*1. Different Location*/
+SELECT Addres FROM Employee;
+
+/*2. maximum and minimum Salary*/
+SELECT Max(Salary) FROM Employee;
+SELECT MIN(Salary) FROM Employee;
+
+/*3. content of Employee table according to the ascending order of Salary amount*/
+SELECT * FROM Employee ORDER BY Salary ASC;
+
+/*4. name of Employee who lived in Nasik or Pune city*/
+SELECT * FROM Employee where Addres='Pune' or Addres= 'Nashik';
+
+/*5. name of Employees who does not get commission*/
+SELECT * FROM Employee where Comission is NULL;
+
+/*6. Change the city of Amit to Nashik*/
+UPDATE Employee SET Addres='Nashik' where EName='Amit';
+SELECT * FROM Employee;
+
+/*7. information of Employees whose name starts with ‘A’*/
+SELECT EName FROM Employee where EName like 'A';
+
+/*8. count of staff FROM Mumbai*/
+SELECT count(Addres) FROM Employee where Addres='Mumbai';
+
+/*9. the count of staff FROM each city*/
+SELECT Addres,count(*) FROM Employee GROUP BY Address;
+
+/*10. Addres FROM where Employees are belonging as well as where projects are going on*/
+CREATE TABLE Employee1(
+ PrNo int,
+ Addres varchar(255)
+);
+insert into Employee1 VALUES (10,'Mumbai');
+insert into Employee1 VALUES (20,'Pune');
+insert into Employee1 VALUES (30,'Jalgaon');
+SELECT Addres,EName FROM Employee union SELECT PrNo,Addres FROM Employee1;
+
+/*11. city wise minimum Salary*/
+SELECT min(Salary),Addres FROM Employee GROUP BY Addres;
+
+/*12. city wise maximum Salary having maximum Salary greater than 26000*/
+SELECT min(Salary),Addres FROM Employee GROUP BY Addres having min(Salary)>26000;
+SELECT * FROM Employee;
+
+/*13. Delete the Employee who is having Salary greater than 30,000*/
+delete FROM Employee where Salary>30000;
+SELECT * FROM Employee;
